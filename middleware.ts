@@ -15,12 +15,13 @@ export default async function middleware(req: NextRequest, _res: NextResponse) {
   const { pathname } = req.nextUrl;
 
   if (
-    pathname.startsWith('/_next') ||
-    pathname.startsWith('/api') ||
-    pathname.startsWith('/static') ||
-    pathname.startsWith('/signin') ||
-    pathname.startsWith('/register') ||
-    PUBLIC_FILE.test(pathname)
+    pathname &&
+    (pathname.startsWith('/_next') ||
+      pathname.startsWith('/api') ||
+      pathname.startsWith('/static') ||
+      pathname.startsWith('/signin') ||
+      pathname.startsWith('/register') ||
+      PUBLIC_FILE.test(pathname))
   ) {
     return NextResponse.next();
   }
