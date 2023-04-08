@@ -9,11 +9,12 @@ import { db } from '@/lib/db';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { Suspense } from 'react';
+import { User } from '@prisma/client';
 
 const getData = async () => {
   await delay(2000);
 
-  const user = await getUserFromCookie(cookies());
+  const user: User | null = await getUserFromCookie(cookies());
 
   const projects = await db.project.findMany({
     where: {
@@ -35,6 +36,7 @@ export default async function Home() {
       <div className=" h-full  items-stretch justify-center min-h-[content]">
         <div className="flex-1 grow flex">
           <Suspense fallback={<GreetingsSkeleton />}>
+            {/* @ts-expect-error Server Component */}
             <Greetings />
           </Suspense>
         </div>
@@ -54,6 +56,7 @@ export default async function Home() {
           <div className="w-full">
             <div className="mt-6 flex-2 grow w-full flex">
               <div className="w-full">
+                {/* @ts-expect-error Server Component */}
                 <TaskCard />
               </div>
             </div>

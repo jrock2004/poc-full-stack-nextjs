@@ -24,12 +24,7 @@ const getData = async () => {
   return tasks;
 };
 
-export type TTaskCard = {
-  title: string;
-  tasks?: Task[];
-};
-
-const TaskCard = async ({ title, tasks }: TTaskCard) => {
+const TaskCard = async ({ title, tasks }: any) => {
   const data = tasks || (await getData());
 
   return (
@@ -47,7 +42,7 @@ const TaskCard = async ({ title, tasks }: TTaskCard) => {
       <div>
         {data && data.length ? (
           <div>
-            {data.map((task, index) => (
+            {data.map((task: Task, index: number) => (
               <div className="py-2" key={`task-item-${index}`}>
                 <div>
                   <span className="text-gray-800">{task.name}</span>

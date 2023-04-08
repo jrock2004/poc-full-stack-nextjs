@@ -21,6 +21,7 @@ export default async function ProjectPage({ params }: any) {
 
   return (
     <div className="h-full overflow-y-auto pr-6 w-1/1">
+      {/* @ts-expect-error Server Component */}
       <TaskCard tasks={project?.tasks || []} title={project?.name || ''} />
     </div>
   );
